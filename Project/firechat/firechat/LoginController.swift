@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
     
@@ -28,8 +29,40 @@ class LoginController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.layer.cornerRadius = 5
         button.layer.masksToBounds = true
+        
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        
         return button
     }()
+    
+    @objc fileprivate func handleRegister() {
+        guard let name = nameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else {
+            print("Form is not valid.")
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, error) in
+            
+            if error != nil {
+                print(String(describing: error))
+                return
+            }
+            
+            guard let uid = user?.uid else {
+                return
+            }
+            
+            let ref = Database.database().reference(fromURL: "https://firechat-d3508.firebaseio.com/")
+            let usersReference = ref.child("users").child(uid)
+            let values = ["name": name, "email": email]
+            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                
+                if err != nil {
+                    print(String(describing: error))
+                }
+            })
+        })
+    }
     
     let nameTextField: UITextField = {
         let tf = UITextField()
