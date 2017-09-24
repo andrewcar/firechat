@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		19DD671837A1AE120951B9AA /* Pods_firechatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E40CAD93B485C3AB75C2214 /* Pods_firechatUITests.framework */; };
+		494889031F7018DD008006E9 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494889021F7018DD008006E9 /* NewMessageController.swift */; };
+		496DEC111F75AFF80048BE38 /* FirechatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496DEC101F75AFF80048BE38 /* FirechatUser.swift */; };
+		496DEC131F77050F0048BE38 /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496DEC121F77050F0048BE38 /* LoginController+handlers.swift */; };
 		49DC860F1F66BDCD00D86C69 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49DC860E1F66BDCD00D86C69 /* GoogleService-Info.plist */; };
 		49DCA2E91F64694000AF85C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DCA2E81F64694000AF85C8 /* AppDelegate.swift */; };
-		49DCA2EB1F64694000AF85C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DCA2EA1F64694000AF85C8 /* ViewController.swift */; };
+		49DCA2EB1F64694000AF85C8 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DCA2EA1F64694000AF85C8 /* MessagesController.swift */; };
 		49DCA2EE1F64694000AF85C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DCA2EC1F64694000AF85C8 /* Main.storyboard */; };
 		49DCA2F01F64694000AF85C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DCA2EF1F64694000AF85C8 /* Assets.xcassets */; };
 		49DCA2F31F64694000AF85C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DCA2F11F64694000AF85C8 /* LaunchScreen.storyboard */; };
@@ -40,10 +43,13 @@
 
 /* Begin PBXFileReference section */
 		1B017E486FAB0A92940F7C7C /* Pods-firechatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-firechatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-firechatTests/Pods-firechatTests.release.xcconfig"; sourceTree = "<group>"; };
+		494889021F7018DD008006E9 /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		496DEC101F75AFF80048BE38 /* FirechatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirechatUser.swift; sourceTree = "<group>"; };
+		496DEC121F77050F0048BE38 /* LoginController+handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
 		49DC860E1F66BDCD00D86C69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		49DCA2E51F64694000AF85C8 /* firechat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firechat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DCA2E81F64694000AF85C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		49DCA2EA1F64694000AF85C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		49DCA2EA1F64694000AF85C8 /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		49DCA2ED1F64694000AF85C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49DCA2EF1F64694000AF85C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49DCA2F21F64694000AF85C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -93,6 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		496DEC0F1F75AF5D0048BE38 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				496DEC101F75AFF80048BE38 /* FirechatUser.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		49DCA2DC1F64694000AF85C8 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +132,7 @@
 		49DCA2E71F64694000AF85C8 /* firechat */ = {
 			isa = PBXGroup;
 			children = (
+				496DEC0F1F75AF5D0048BE38 /* Model */,
 				49DCA3161F646C6500AF85C8 /* Controller */,
 				49DCA2E81F64694000AF85C8 /* AppDelegate.swift */,
 				49DCA2EC1F64694000AF85C8 /* Main.storyboard */,
@@ -151,7 +166,9 @@
 			isa = PBXGroup;
 			children = (
 				49DCA3171F646C7500AF85C8 /* LoginController.swift */,
-				49DCA2EA1F64694000AF85C8 /* ViewController.swift */,
+				49DCA2EA1F64694000AF85C8 /* MessagesController.swift */,
+				494889021F7018DD008006E9 /* NewMessageController.swift */,
+				496DEC121F77050F0048BE38 /* LoginController+handlers.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -464,8 +481,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49DCA2EB1F64694000AF85C8 /* ViewController.swift in Sources */,
+				494889031F7018DD008006E9 /* NewMessageController.swift in Sources */,
+				49DCA2EB1F64694000AF85C8 /* MessagesController.swift in Sources */,
+				496DEC131F77050F0048BE38 /* LoginController+handlers.swift in Sources */,
 				49DCA3181F646C7500AF85C8 /* LoginController.swift in Sources */,
+				496DEC111F75AFF80048BE38 /* FirechatUser.swift in Sources */,
 				49DCA2E91F64694000AF85C8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
