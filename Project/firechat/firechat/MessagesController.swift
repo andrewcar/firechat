@@ -20,10 +20,44 @@ class MessagesController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleNewMessage))
         
         checkIfUserIsLoggedIn()
+        
+        observeMessages()
+    }
+    
+    var messages = [FirechatMessage]()
+    
+    fileprivate func observeMessages() {
+        let ref = Database.database().reference().child("messages")
+        ref.observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                let message = FirechatMessage()
+                message.setValuesForKeys(dictionary)
+                self.messages.append(message)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            
+        }, withCancel: nil)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
+        let message = messages[indexPath.row]
+        cell.textLabel?.text = message.toId
+        cell.detailTextLabel?.text = message.text
+        return cell
     }
     
     @objc fileprivate func handleNewMessage() {
         let newMessageController = NewMessageController()
+        newMessageController.messagesController = self
         present(UINavigationController(rootViewController: newMessageController), animated: true, completion: nil)
     }
     
@@ -42,7 +76,6 @@ class MessagesController: UITableViewController {
     Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             
         if let dictionary = snapshot.value as? [String: Any] {
-//            self.navigationItem.title = dictionary["name"] as? String
             
             let user = FirechatUser()
             user.setValuesForKeys(dictionary)
@@ -91,21 +124,11 @@ class MessagesController: UITableViewController {
         containerView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
         
         self.navigationItem.titleView = titleView
-        
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(showChatController), for: .touchUpInside)
-        
-        titleView.addSubview(button)
-        
-        button.leftAnchor.constraint(equalTo: titleView.leftAnchor).isActive = true
-        button.rightAnchor.constraint(equalTo: titleView.rightAnchor).isActive = true
-        button.widthAnchor.constraint(equalTo: titleView.widthAnchor).isActive = true
-        button.heightAnchor.constraint(equalTo: titleView.heightAnchor).isActive = true
     }
     
-    @objc fileprivate func showChatController() {
+    @objc func showChatController(for user: FirechatUser) {
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        chatLogController.user = user
         navigationController?.pushViewController(chatLogController, animated: true)
     }
     

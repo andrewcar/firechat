@@ -17,7 +17,6 @@ class NewMessageController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad")
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         
@@ -27,11 +26,12 @@ class NewMessageController: UITableViewController {
     }
     
     fileprivate func fetchUser() {
-        print("fetchUser")
         Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let user = FirechatUser()
+                user.id = snapshot.key
+                
                 user.setValuesForKeys(dictionary)
                 self.users.append(user)
                 
@@ -68,7 +68,16 @@ class NewMessageController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64
+        return 72
+    }
+    
+    var messagesController: MessagesController?
+    
+    override  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismiss(animated: true) {
+            let user = self.users[indexPath.row]
+            self.messagesController?.showChatController(for: user)
+        }
     }
 }
  
