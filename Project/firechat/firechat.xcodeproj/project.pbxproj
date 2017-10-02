@@ -11,6 +11,7 @@
 		494889031F7018DD008006E9 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494889021F7018DD008006E9 /* NewMessageController.swift */; };
 		496DEC111F75AFF80048BE38 /* FirechatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496DEC101F75AFF80048BE38 /* FirechatUser.swift */; };
 		496DEC131F77050F0048BE38 /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496DEC121F77050F0048BE38 /* LoginController+handlers.swift */; };
+		496DEC161F797B1F0048BE38 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496DEC151F797B1F0048BE38 /* Extensions.swift */; };
 		49DC860F1F66BDCD00D86C69 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49DC860E1F66BDCD00D86C69 /* GoogleService-Info.plist */; };
 		49DCA2E91F64694000AF85C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DCA2E81F64694000AF85C8 /* AppDelegate.swift */; };
 		49DCA2EB1F64694000AF85C8 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DCA2EA1F64694000AF85C8 /* MessagesController.swift */; };
@@ -46,6 +47,7 @@
 		494889021F7018DD008006E9 /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		496DEC101F75AFF80048BE38 /* FirechatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirechatUser.swift; sourceTree = "<group>"; };
 		496DEC121F77050F0048BE38 /* LoginController+handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
+		496DEC151F797B1F0048BE38 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		49DC860E1F66BDCD00D86C69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		49DCA2E51F64694000AF85C8 /* firechat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firechat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DCA2E81F64694000AF85C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		496DEC141F797B100048BE38 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				496DEC151F797B1F0048BE38 /* Extensions.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		49DCA2DC1F64694000AF85C8 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +142,7 @@
 		49DCA2E71F64694000AF85C8 /* firechat */ = {
 			isa = PBXGroup;
 			children = (
+				496DEC141F797B100048BE38 /* Helpers */,
 				496DEC0F1F75AF5D0048BE38 /* Model */,
 				49DCA3161F646C6500AF85C8 /* Controller */,
 				49DCA2E81F64694000AF85C8 /* AppDelegate.swift */,
@@ -268,7 +279,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Andrew Carvajal";
 				TargetAttributes = {
 					49DCA2E41F64694000AF85C8 = {
@@ -487,6 +498,7 @@
 				49DCA3181F646C7500AF85C8 /* LoginController.swift in Sources */,
 				496DEC111F75AFF80048BE38 /* FirechatUser.swift in Sources */,
 				49DCA2E91F64694000AF85C8 /* AppDelegate.swift in Sources */,
+				496DEC161F797B1F0048BE38 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,7 +563,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -559,7 +573,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -601,7 +619,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -609,7 +629,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

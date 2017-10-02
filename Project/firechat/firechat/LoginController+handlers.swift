@@ -30,9 +30,11 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             
             // successfully authenticated user
             let imageName = NSUUID().uuidString
-            let storageRef = Storage.storage().reference().child("profile_image").child("\(imageName).png")
+            let storageRef = Storage.storage().reference().child("profile_image").child("\(imageName).jpg")
             
-            if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
+            if let profileImage = self.profileImageView.image, let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
+                            
+//            if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
                 
                 storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                     
@@ -64,6 +66,12 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             if err != nil {
                 print(String(describing: err))
             }
+            
+//            self.messagesController?.fetchUserAndSetupNavBarTitle()
+//            self.messagesController?.navigationItem.title = values["name"]
+            let user = FirechatUser()
+            user.setValuesForKeys(values)
+            self.messagesController?.setupNavBar(with: user)
             
             self.dismiss(animated: true, completion: nil)
         })
