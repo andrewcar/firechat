@@ -91,6 +91,22 @@ class MessagesController: UITableViewController {
         containerView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
         
         self.navigationItem.titleView = titleView
+        
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(showChatController), for: .touchUpInside)
+        
+        titleView.addSubview(button)
+        
+        button.leftAnchor.constraint(equalTo: titleView.leftAnchor).isActive = true
+        button.rightAnchor.constraint(equalTo: titleView.rightAnchor).isActive = true
+        button.widthAnchor.constraint(equalTo: titleView.widthAnchor).isActive = true
+        button.heightAnchor.constraint(equalTo: titleView.heightAnchor).isActive = true
+    }
+    
+    @objc fileprivate func showChatController() {
+        let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(chatLogController, animated: true)
     }
     
     @objc fileprivate func handleLogout() {
