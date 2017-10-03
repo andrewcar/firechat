@@ -1,5 +1,5 @@
 //
-//  FirechatMessage.swift
+//  Message.swift
 //  firechat
 //
 //  Created by Andrew Carvajal on 10/2/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirechatMessage: NSObject {
+class Message: NSObject {
 
     var fromId: String?
     var text: String?

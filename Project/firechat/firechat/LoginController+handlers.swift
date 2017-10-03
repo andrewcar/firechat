@@ -17,7 +17,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             return
         }
         
-        Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, error) in
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
             
             if error != nil {
                 print(String(describing: error))
@@ -58,7 +58,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
     }
     
     fileprivate func registerUserIntoDatabase(with uid: String, values: [String: String]) {
-        let ref = Database.database().reference(fromURL: "https://firechat-d3508.firebaseio.com/")
+        let ref = Database.database().reference()
         let usersReference = ref.child("users").child(uid)
         
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
@@ -69,7 +69,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             
 //            self.messagesController?.fetchUserAndSetupNavBarTitle()
 //            self.messagesController?.navigationItem.title = values["name"]
-            let user = FirechatUser()
+            let user = User()
             user.setValuesForKeys(values)
             self.messagesController?.setupNavBar(with: user)
             

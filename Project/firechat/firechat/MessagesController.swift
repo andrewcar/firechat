@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 
 class MessagesController: UITableViewController {
+    
+    let cellId = "cellId"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,19 +23,37 @@ class MessagesController: UITableViewController {
         
         checkIfUserIsLoggedIn()
         
+        tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
+        
         observeMessages()
     }
     
-    var messages = [FirechatMessage]()
+    var messages = [Message]()
+    var messagesDictionary = [String: Message]()
     
     fileprivate func observeMessages() {
         let ref = Database.database().reference().child("messages")
         ref.observe(.childAdded, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                let message = FirechatMessage()
+                let message = Message()
                 message.setValuesForKeys(dictionary)
                 self.messages.append(message)
+                
+                if let toId = message.toId {
+                    self.messagesDictionary[toId] = message
+                    
+                    self.messages = Array(self.messagesDictionary.values)
+                    self.messages.sort(by: { (message1, message2) -> Bool in
+                        
+                        if let time1 = message1.timestamp {
+                            if let time2 = message2.timestamp {
+                                return time1 < time2
+                            }
+                        }
+                        return false
+                    })
+                }
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -48,11 +68,17 @@ class MessagesController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! UserCell
+        
         let message = messages[indexPath.row]
-        cell.textLabel?.text = message.toId
-        cell.detailTextLabel?.text = message.text
+        cell.message = message
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 72
     }
     
     @objc fileprivate func handleNewMessage() {
@@ -77,7 +103,7 @@ class MessagesController: UITableViewController {
             
         if let dictionary = snapshot.value as? [String: Any] {
             
-            let user = FirechatUser()
+            let user = User()
             user.setValuesForKeys(dictionary)
             self.setupNavBar(with: user)
         }
@@ -85,7 +111,7 @@ class MessagesController: UITableViewController {
         }, withCancel: nil)
     }
     
-    func setupNavBar(with user: FirechatUser) {
+    func setupNavBar(with user: User) {
         let titleView = UIView()
         titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
 
@@ -126,7 +152,7 @@ class MessagesController: UITableViewController {
         self.navigationItem.titleView = titleView
     }
     
-    @objc func showChatController(for user: FirechatUser) {
+    @objc func showChatController(for user: User) {
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         chatLogController.user = user
         navigationController?.pushViewController(chatLogController, animated: true)

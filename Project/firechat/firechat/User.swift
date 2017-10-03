@@ -1,5 +1,5 @@
 //
-//  FirechatUser.swift
+//  User.swift
 //  firechat
 //
 //  Created by Andrew Carvajal on 9/22/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirechatUser: NSObject {
+class User: NSObject {
     var id: String?
     var name: String?
     var email: String?
